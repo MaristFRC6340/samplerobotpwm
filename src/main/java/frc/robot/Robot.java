@@ -105,6 +105,7 @@ public class Robot extends TimedRobot {
       // Add More Commands
       default:
         // Put Default Code Here
+        // Or nothing happens. 
         System.out.println("Default");
         break;
     }
