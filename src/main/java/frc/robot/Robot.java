@@ -6,6 +6,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -30,6 +32,15 @@ public class Robot extends TimedRobot {
   private static Joystick leftJoystick = new Joystick(0);
   private static Joystick rightJoystick = new Joystick(1);
 
+  // Smart Dashboard and Auto Chooser
+  private static final String kDefaultAuto = "Default";
+  private static final String kAimTimeAuto = "Aim Time";
+  private static final String kDriveTowards = "Drive Towards Target";
+  private static final String kChooseTarget = "Choose Target";
+
+  private String m_autoSelected;
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -39,6 +50,16 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    // Initialize Chooser
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("Aim Time", kAimTimeAuto);
+    m_chooser.addOption("Drive Towards Target", kDriveTowards);
+    m_chooser.addOption("Choose Target", kChooseTarget);
+
+    String [] choices = {kDefaultAuto, kAimTimeAuto, kDriveTowards, kChooseTarget};
+    SmartDashboard.putStringArray("Auto List", choices);
+
   }
 
   /**
@@ -67,13 +88,30 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    m_aimTimeCommand = m_robotContainer.getAimTimeCommand();
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //m_aimTimeCommand = m_robotContainer.getAimTimeCommand();
+
+    m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
+
+    switch (m_autoSelected) {
+      case kAimTimeAuto:
+        System.out.println("Running Aim Time");
+        m_autonomousCommand = m_robotContainer.getAimTimeCommand();
+        break;
+      case kDriveTowards:
+        System.out.println("Running Drive Towards");
+        // Assign Command
+        break;
+      // Add More Commands
+      default:
+        // Put Default Code Here
+        System.out.println("Default");
+        break;
+    }
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
-      //m_autonomousCommand.schedule();
-      m_aimTimeCommand.schedule();
+      m_autonomousCommand.schedule();
     }
   }
 
