@@ -20,6 +20,7 @@ public class DriveTrain extends SubsystemBase {
   public DriveTrain() {
 
     // Initialize Motor Controllers
+    // These are for PWM based robots
     leftFront = new Spark(0);
     leftRear = new Spark(1);
     rightFront = new Spark(2);
