@@ -46,10 +46,12 @@ public class AimTimeCommand extends CommandBase {
     boolean hasTargets = result.hasTargets();
 
     double error = 0;
+    int targetID = -1; // Default - no Target seen
 
     if (hasTargets) {
       PhotonTrackedTarget target = result.getBestTarget();
       error = target.getYaw();
+      targetID = target.getFiducialId();
     }
 
     // Set Error
@@ -64,6 +66,7 @@ public class AimTimeCommand extends CommandBase {
       turnPower = -0.4;
     }
     System.out.println(error*power);
+    System.out.println(targetID);
     drivetrain.drive(-turnPower, turnPower);
 
 
