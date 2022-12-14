@@ -96,7 +96,7 @@ public class Robot extends TimedRobot {
     switch (m_autoSelected) {
       case kAimTimeAuto:
         System.out.println("Running Aim Time");
-        m_autonomousCommand = m_robotContainer.getAimTimeCommand();
+        //m_autonomousCommand = m_robotContainer.getAimTimeCommand();
         break;
       case kDriveTowards:
         System.out.println("Running Drive Towards");
@@ -106,7 +106,7 @@ public class Robot extends TimedRobot {
       default:
         // Put Default Code Here
         // Or nothing happens. 
-        System.out.println("Default");
+        System.out.println("Default"); 
         break;
     }
 
