@@ -96,13 +96,17 @@ public class Robot extends TimedRobot {
     switch (m_autoSelected) {
       case kAimTimeAuto:
         System.out.println("Running Aim Time");
-        //m_autonomousCommand = m_robotContainer.getAimTimeCommand();
+        m_autonomousCommand = m_robotContainer.getAimTimeCommand();
         break;
       case kDriveTowards:
         System.out.println("Running Drive Towards");
         // Assign Command
         break;
       // Add More Commands
+      case kChooseTarget:
+        System.out.println("Choose Target");
+        m_aimTimeCommand = m_robotContainer.getChooseTarget();
+        break;
       default:
         // Put Default Code Here
         // Or nothing happens. 
