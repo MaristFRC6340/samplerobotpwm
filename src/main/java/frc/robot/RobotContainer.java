@@ -7,6 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AimTimeCommand;
+import frc.robot.commands.ChooseTargetCommand;
+import frc.robot.commands.DriveTowardsCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.DriveTrain;
@@ -30,6 +32,7 @@ public class RobotContainer {
   private final TankDrive m_tankDrive = new TankDrive(driveTrain);
 
   private final AimTimeCommand aimTime = new AimTimeCommand(driveTrain, 0.4, 30);
+  private final ChooseTargetCommand chooseTarget = new ChooseTargetCommand(driveTrain, 0.4, 30, 6);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -61,6 +64,10 @@ public class RobotContainer {
 
   public Command getTeleopCommand() {
     return m_tankDrive;
+  }
+
+  public Command getChooseTarget() {
+    return chooseTarget;
   }
   
 }

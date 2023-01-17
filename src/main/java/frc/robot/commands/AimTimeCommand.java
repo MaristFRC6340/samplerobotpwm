@@ -28,6 +28,7 @@ public class AimTimeCommand extends CommandBase {
     drivetrain = dtrain;
     duration = time;
     power = pwr;
+    addRequirements(drivetrain);
 
   }
 
